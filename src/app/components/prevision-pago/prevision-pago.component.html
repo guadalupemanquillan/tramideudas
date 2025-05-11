@@ -1,0 +1,45 @@
+<div class="container p-3">
+  <div class="card p-3">
+    <h2 class="card-title">Previsiones de Pago</h2>
+
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Importe</th>
+            <th>Fecha Prevista</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prevision of previsiones">
+            <td>{{ prevision.titulo }}</td>
+            <td>{{ prevision.importe | currency:'EUR':'symbol' }}</td>
+            <td>{{ prevision.fechaPrevista | date:'dd/MM/yyyy' }}</td>
+            <td>
+              <span class="badge"
+                    [ngClass]="{
+                      'bg-success': prevision.pagado,
+                      'bg-warning': !prevision.pagado && !prevision.error,
+                      'bg-danger': prevision.error
+                    }">
+                {{ prevision.pagado ? 'Pagado' : (prevision.error ? 'Error' : 'Pendiente') }}
+              </span>
+            </td>
+            <td>
+              <button type="button" class="btn btn-primary m-2" data-toggle="modal" data-target="#exampleModal">Detalles</button>
+              <button class="btn btn-primary m-2" (click)="pagarPrevision(prevision)" [disabled]="prevision.pagado">Pagar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<app-prevision-pago-detalles-modal
+
+></app-prevision-pago-detalles-modal>

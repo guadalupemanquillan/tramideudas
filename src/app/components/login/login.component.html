@@ -1,0 +1,88 @@
+<div
+  class="container d-flex align-items-center justify-content-center min-vh-100"
+>
+  <div class="card shadow-sm p-4 col-12 col-md-6 col-lg-5 col-xl-4">
+    <div class="card-body">
+      <img
+        src="https://tramideudas.es/wp-content/uploads/2023/04/TramiDeudas-LOGO-PNG-600x60-1.png"
+        alt="TramiDeudas Logo"
+        class="img-fluid mx-auto d-block mb-4"
+      />
+
+      <h2 class="text-center mb-2 welcome-title">Bienvenido</h2>
+      <p class="text-center mb-4" *ngIf="currentStep === 1">
+        Indique su número de DNI/NIE para entrar
+      </p>
+
+      <!-- Paso 1: DNI -->
+      <div *ngIf="currentStep === 1 && !isLoggedIn">
+        <div class="mb-3">
+          <input
+            type="text"
+            [(ngModel)]="dni"
+            class="form-control"
+            placeholder="DNI, NIE o CIF"
+            [disabled]="isLoading"
+          />
+          <div class="text-danger small mt-1" *ngIf="dniError">
+            {{ dniError }}
+          </div>
+        </div>
+        <button
+          (click)="requestOTP()"
+          class="btn btn-primary w-100"
+          [disabled]="isLoading"
+        >
+          <span *ngIf="!isLoading">Entrar al sistema</span>
+          <span *ngIf="isLoading">
+            <span
+              class="spinner-border spinner-border-sm me-2"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Procesando...
+          </span>
+        </button>
+      </div>
+
+      <!-- Paso 2: OTP -->
+      <div *ngIf="currentStep === 2 && !isLoggedIn">
+        <p class="text-center">
+          Introduzca el código de 4 dígitos que ha recibido por SMS al número
+          registrado
+        </p>
+        <p class="text-center text-muted fst-italic mb-3">
+          Si no recibe el código, por favor póngase en contacto con nosotros
+        </p>
+        <div class="mb-3">
+          <input
+            type="text"
+            [(ngModel)]="otpCode"
+            class="form-control"
+            placeholder="Código de acceso"
+            maxlength="4"
+            [disabled]="isLoading"
+          />
+          <div class="text-danger small mt-1" *ngIf="otpError">
+            {{ otpError }}
+          </div>
+        </div>
+        <button
+          (click)="validateOTP()"
+          class="btn btn-primary w-100"
+          [disabled]="isLoading"
+        >
+          <span *ngIf="!isLoading">Validar código</span>
+          <span *ngIf="isLoading">
+            <span
+              class="spinner-border spinner-border-sm me-2"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Validando...
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,129 @@
+.card {
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+  
+  .card:hover {
+    transform: translateY(-2px);
+  }
+  
+  .card-title {
+    color: #2c3e50;
+    font-weight: 600;
+  }
+  
+  .table {
+    margin-bottom: 0;
+  }
+  
+  .table th {
+    background-color: #f8f9fa;
+    border-top: none;
+  }
+  
+  .badge {
+    padding: 0.5em 1em;
+    font-weight: 500;
+    display: inline-block;
+    min-width: 120px;
+    text-align: center;
+  }
+  
+  .text-success {
+    color: #28a745 !important;
+  }
+  
+  .text-danger {
+    color: #dc3545 !important;
+  }
+  
+  .bg-success {
+    background-color: #28a745 !important;
+  }
+  
+  .bg-danger {
+    background-color: #dc3545 !important;
+  }
+  
+  .bg-secondary {
+    background-color: #6c757d !important;
+  }
+  
+  .bg-info {
+    background-color: #0d6efd !important;
+  }
+  
+  .bg-primary {
+    background-color: #0d6efd !important;
+  }
+  
+  .table-responsive {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+  
+  .timeline {
+    position: relative;
+    padding: 20px 0;
+  }
+  
+  .timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 20px;
+    height: 100%;
+    width: 2px;
+    background: #e9ecef;
+  }
+  
+  .timeline-item {
+    position: relative;
+    padding-left: 50px;
+    margin-bottom: 20px;
+  }
+  
+  .timeline-marker {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #0d6efd;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px #0d6efd;
+  }
+  
+  .timeline-content {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+  
+  .timeline-marker.completed {
+    background: #28a745;
+    box-shadow: 0 0 0 2px #28a745;
+  }
+  
+  .timeline-content.completed-content {
+    background: #f0fdf4;
+    border-left: 3px solid #28a745;
+  }
+  
+  .bg-warning {
+    background-color: #ffc107 !important;
+  }
+  

@@ -1,0 +1,187 @@
+<div class="d-flex flex-column min-vh-100">
+  <!-- Navbar -->
+  <app-navbar
+    [userDisplayName]="userDisplayName"
+    [userDni]="userDni"
+  ></app-navbar>
+
+  <!-- Contenido principal -->
+  <div class="container mt-4 flex-grow-1">
+    <!-- Resumen de cuenta -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h2 class="card-title mb-4">Resumen de tu cuenta</h2>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card bg-light mb-4">
+                  <div class="card-body">
+                    <h5 class="card-title">Plan de pago</h5>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <p class="card-text">
+                          <strong>Cuota mensual:</strong>
+                          {{
+                            cuentaNegociacion?.planDePago?.pagoMensual
+                              | number : "1.2-2" : "es"
+                          }}€<br />
+                          <strong>Meses restantes:</strong> {{ mesesRestantes }}
+                        </p>
+                      </div>
+                      <div class="col-md-6">
+                        <p class="card-text">
+                          <strong>Próximo pago:</strong>
+                          {{ proximaCuota?.fechaPrevista | date : "dd/MM/yyyy"
+                          }}<br />
+                          <strong>Monto:</strong>
+                          {{
+                            proximaCuota?.monto | number : "1.2-2" : "es"
+                          }}€<br />
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card bg-light mb-3">
+                  <div class="card-body">
+                    <h5 class="card-title">Estado de deudas</h5>
+                    <p class="card-text">
+                      <strong>Deudas totales:</strong> {{ deudas?.length
+                      }}<br />
+                      <strong>Deudas pagadas:</strong> {{ deudasPagadas }}<br />
+                      <strong>Deudas en proceso:</strong> {{ deudasEnProceso }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Historial de movimientos -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h2 class="card-title mb-4">Historial de movimientos</h2>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Concepto</th>
+                    <th>Monto</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let movimiento of movimientos">
+                    <td>
+                      {{ movimiento.createdAt | date : "dd/MM/yyyy HH:mm" }}
+                    </td>
+                    <td>{{ movimiento.comentario }}</td>
+                    <td
+                      [ngClass]="{
+                        'text-success': movimiento.monto > 0,
+                        'text-danger': movimiento.monto < 0
+                      }"
+                    >
+                      {{ movimiento.monto | number : "1.2-2" : "es" }}€
+                    </td>
+                    <td>
+                      <span
+                        class="badge"
+                        [ngClass]="{
+                          'bg-primary': movimiento.tipo === 'pagoAcreedor',
+                          'bg-success': movimiento.tipo === 'abonoCliente',
+                          'bg-secondary': movimiento.tipo === 'honorarios',
+                          'bg-danger': ![
+                            'pagoAcreedor',
+                            'abonoCliente',
+                            'honorarios'
+                          ].includes(movimiento.tipo)
+                        }"
+                      >
+                        <ng-container [ngSwitch]="movimiento.tipo">
+                          <ng-container *ngSwitchCase="'pagoAcreedor'"
+                            >Pago Realizado</ng-container
+                          >
+                          <ng-container *ngSwitchCase="'abonoCliente'"
+                            >Ingreso Recibido</ng-container
+                          >
+                          <ng-container *ngSwitchCase="'honorarios'"
+                            >Honorarios</ng-container
+                          >
+                          <ng-container *ngSwitchDefault>{{
+                            movimiento.tipo | titlecase
+                          }}</ng-container>
+                        </ng-container>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Plan de pagos -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h2 class="card-title mb-4">Plan de pagos</h2>
+            <div class="timeline">
+              <div class="timeline-item" *ngFor="let cuota of todasLasCuotas">
+                <div
+                  class="timeline-marker"
+                  [ngClass]="{ completed: cuota.estado === 'pagada' }"
+                ></div>
+                <div
+                  class="timeline-content"
+                  [ngClass]="{ 'completed-content': cuota.estado === 'pagada' }"
+                >
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div>
+                      <h5 class="mb-1">Cuota {{ cuota.numero }}</h5>
+                      <p class="mb-0 text-muted">
+                        Fecha prevista:
+                        {{ cuota.fechaPrevista | date : "dd/MM/yyyy" }}
+                      </p>
+                    </div>
+                    <div class="text-end">
+                      <h5 class="mb-1">
+                        {{ cuota.monto | number : "1.2-2" : "es" }}€
+                      </h5>
+                      <span
+                        class="badge"
+                        [ngClass]="{
+                          'bg-warning': cuota.estado === 'pendiente',
+                          'bg-success': cuota.estado === 'pagada'
+                        }"
+                      >
+                        {{ cuota.estado | titlecase }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <app-footer></app-footer>
+</div>
