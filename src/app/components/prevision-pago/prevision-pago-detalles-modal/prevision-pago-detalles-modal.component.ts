@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-@Output() cerrar = new EventEmitter<void>();
 @Component({
   selector: 'app-prevision-pago-detalles-modal',
   templateUrl: './prevision-pago-detalles-modal.component.html',
@@ -15,7 +14,3 @@ export class PrevisionPagoDetallesModalComponent {
     this.cerrar.emit();
   }
 }
-
-$('#myModal').on('shown.bs.modal', function () {
-  $('#myInput').trigger('focus')
-})
