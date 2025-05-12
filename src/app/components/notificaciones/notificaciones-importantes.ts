@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NotificacionesService } from './notificaciones.service';
-import { Notificacion } from './notificaciones';
+//import { NotificacionesService } from './notificaciones.service';
+//import { Notificacion } from './notificaciones';
 
 @Component({
   selector: 'app-notificaciones-importantes',
@@ -24,11 +23,11 @@ export class NotificacionesImportantesComponent implements OnInit {
         // Filtramos las notificaciones para obtener solo las importantes
         this.notificacionesImportantes = response.filter(notificacion => notificacion.importante);
       },
-      error: (error) => {
-        console.error('Error al obtener las notificaciones importantes:', error);
-      },
-    });
-  }
+  //    error: (error) => {
+  //     console.error('Error al obtener las notificaciones importantes:', error);
+  //    },
+  //   });
+  // }
 
   /**
    * Método para marcar una notificación como leída
@@ -43,9 +42,9 @@ export class NotificacionesImportantesComponent implements OnInit {
           this.notificacionesImportantes[index].estado = 'leida';
         }
       },
-      error: (error) => {
+ //     error: (error) => {
         console.error('Error al marcar la notificación como leída:', error);
-      },
-    });
+//    },
+  //  });
   }
-}
+//}
