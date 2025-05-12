@@ -1,10 +1,10 @@
-//import { NotificacionesImportantesComponent } from './components/notificaciones/notificaciones-importantes.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PrevisionPagoComponent } from './components/prevision-pago/prevision-pago.component';
-//import { Notificaciones } from './components/notificaciones/notificaciones-importantes.component
+//import { Notificaciones } from './components/notificaciones/notificaciones.component´;
+
 
 const routes: Routes = [
 //  { path: '', redirectTo: '/login', pathMatch: 'full' },
