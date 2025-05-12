@@ -1,4 +1,4 @@
-<div class="modal fade show" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: block;">
+<div class="modal" [class.show]="modalAbierto" [style.display]="modalAbierto ? 'block' : 'none'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="exampleModal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -7,8 +7,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <p><strong>Importe:</strong> {{ prevision.importe }} €</p>
+      <div class="modal-body" *ngIf="prevision">
+        <p><strong>Título:</strong> {{ prevision.titulo }}</p>
+        <p><strong>Importe:</strong> {{ prevision.importe | currency:'EUR':'symbol' }}</p>
         <p><strong>Fecha prevista:</strong> {{ prevision.fechaPrevista | date:'dd/MM/yyyy' }}</p>
         <p><strong>Pagado:</strong> {{ prevision.pagado ? 'Sí' : 'No' }}</p>
         <p><strong>Reembolsado:</strong> {{ prevision.reembolsado ? 'Sí' : 'No' }}</p>

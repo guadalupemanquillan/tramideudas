@@ -203,24 +203,9 @@ export class PrevisionPagoComponent implements OnInit {
     });
   }
 
-  verDetalles(prevision: any) {
-    Swal.fire({
-      title: `Detalles de la previsión ${prevision.titulo}`,
-      html: `
-        <p><strong>Expediente:</strong> ${prevision.expediente}</p>
-        <p><strong>Cliente:</strong> ${prevision.cliente}</p>
-        <p><strong>Importe:</strong> ${prevision.importe} €</p>
-        <p><strong>Fecha prevista:</strong> ${new Date(prevision.fechaPrevista).toLocaleDateString('es-ES')}</p>
-          <p><strong>Pagado:</strong> ${prevision.pagado ? 'Sí' : 'No'}</p>
-        <p><strong>Reembolsado:</strong> ${prevision.reembolsado ? 'Sí' : 'No'}</p>
-        <p><strong>Email enviado:</strong> ${prevision.emailEnviado ? 'Sí' : 'No'}</p>
-      `,
-      icon: 'info',
-      showCancelButton: false,
-      showConfirmButton: false
-    });
-  }
   verDetallesModal(prevision: any) {
+    console.log("A");
+    
     this.previsionSeleccionada = prevision; 
     this.modalAbierto = true; 
   }
@@ -228,6 +213,7 @@ export class PrevisionPagoComponent implements OnInit {
   // Función para cerrar el modal
   cerrarModal() {
     this.modalAbierto = false;
+    this.previsionSeleccionada = null;
   }
 
   mostrarError(prevision: any) {
@@ -238,7 +224,5 @@ export class PrevisionPagoComponent implements OnInit {
       confirmButtonText: 'Close'
     });
   }
-
-  
 }
 
