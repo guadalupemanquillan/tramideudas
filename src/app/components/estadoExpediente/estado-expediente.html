@@ -1,0 +1,33 @@
+<div *ngIf="expediente">
+    <h2>Expediente {{ expediente.id }}</h2>
+    <div>
+      <strong>Estado del expediente:</strong>
+      <span>{{ expediente.estado }}</span>
+    </div>
+  
+    <div *ngIf="expediente.historial && expediente.historial.length > 0">
+      <h3>Historial:</h3>
+      <ul>
+        <li *ngFor="let item of expediente.historial">
+          <div>
+            <strong>{{ item.titulo }}</strong>
+          </div>
+          <div>
+            <em>{{ item.descripcion }}</em>
+          </div>
+          <div>
+            <small>{{ item.fecha | date: 'dd/MM/yyyy' }}</small>
+          </div>
+        </li>
+      </ul>
+    </div>
+  
+    <div *ngIf="expediente.historial.length === 0">
+      <p>No hay historial disponible.</p>
+    </div>
+  </div>
+  
+  <div *ngIf="!expediente">
+    <p>Cargando datos del expediente...</p>
+  </div>
+  
