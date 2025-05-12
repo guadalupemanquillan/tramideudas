@@ -235,7 +235,7 @@ export class PrevisionPagoComponent implements OnInit {
       title: 'Error',
       text: `Se ha producido un error con la previsión: ${prevision.titulo}`,
       icon: 'error',
-      confirmButtonText: 'Cerrar'
+      confirmButtonText: 'Close'
     });
   }
 
