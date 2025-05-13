@@ -17,6 +17,7 @@ import { FooterComponent } from './templates/footer/footer.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { PrevisionPagoComponent } from './components/prevision-pago/prevision-pago.component';
 import { PrevisionPagoDetallesModalComponent } from './components/prevision-pago/prevision-pago-detalles-modal/prevision-pago-detalles-modal.component';
+import { NotificacionesComponent } from './components/notificaciones/notificaciones.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { PrevisionPagoDetallesModalComponent } from './components/prevision-pago
     NavbarComponent,
     FooterComponent,
     PrevisionPagoComponent,
-    PrevisionPagoDetallesModalComponent
+    PrevisionPagoDetallesModalComponent,
+    NotificacionesComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [
@@ -36,4 +38,3 @@ import { PrevisionPagoDetallesModalComponent } from './components/prevision-pago
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-

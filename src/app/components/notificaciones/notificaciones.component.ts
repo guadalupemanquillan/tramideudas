@@ -7,7 +7,7 @@ interface Notificacion {
   titulo: string;
   descripcion: string;
   departamento: string;
-  createdAt: String;
+  createdAt: string; 
   estado: 'leida' | 'no leida';
 }
 
