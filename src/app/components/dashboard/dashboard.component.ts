@@ -1,42 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-
-interface Cliente {
-  name: string;
-  lastname: string;
-  identityDocument: string;
-}
-
-interface PlanDePago {
-  pagoMensual: number;
-  mesesTotales: number;
-  mesesPlan: number;
-  deudaFinal: number;
-}
-
-interface CuentaNegociacion {
-  planDePago: PlanDePago;
-}
-
-interface Deuda {
-  estado: string;
-  _id: string;
-}
-
-interface Movimiento {
-  createdAt: string;
-  monto: number;
-  tipo: string;
-  comentario: string;
-}
-
-interface Cuota {
-  estado: string;
-  monto: number;
-  fechaPrevista: string;
-  numero?: number;
-}
+import { Cuota } from '../../core/models/dashboard.model';
+import { Movimiento } from '../../core/models/dashboard.model';
+import { Deuda } from '../../core/models/dashboard.model';
+import { CuentaNegociacion } from '../../core/models/dashboard.model';
+import { PlanDePago } from '../../core/models/dashboard.model';
+import { Cliente } from '../../core/models/dashboard.model';
 
 @Component({
   selector: 'app-dashboard',

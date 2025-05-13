@@ -14,4 +14,3 @@ export interface PrevisionPago {
     pagadoAlProcurador: boolean;
     fechaPagoAlProcurador: string | null;
   }
-  

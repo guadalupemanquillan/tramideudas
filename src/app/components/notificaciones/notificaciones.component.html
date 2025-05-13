@@ -1,5 +1,4 @@
 <div *ngIf="notificacionesImportantes.length > 0">
-  <h2>Notificaciones Importantes</h2>
   <ul>
     <li *ngFor="let notificacion of notificacionesImportantes">
       <div class="notificacion">
@@ -16,9 +15,9 @@
           <small>Creada el: {{ notificacion.createdAt | date: 'dd/MM/yyyy' }}</small>
         </div>
         <div>
-          <button (click)="marcarLeida(notificacion.titulo)">
-            Marcar como leída
-          </button>
+         <!--<button (click)="marcarLeida(notificacion.titulo)">
+           Marcar como leída
+        </button>--> 
         </div>
       </div>
     </li>

@@ -1,18 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { Expediente } from 'src/app/core/models/estado-expediente.model';
 
-interface Historial {
-  titulo: string;
-  descripcion: string;
-  fecha: Date;
-}
-
-interface Expediente {
-  id: string;
-  historial: Historial[];
-  estado: string; // Estado del expediente 
-}
 
 @Injectable({
   providedIn: 'root',
