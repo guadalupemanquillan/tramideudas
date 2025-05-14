@@ -190,20 +190,65 @@ export class PrevisionPagoComponent implements OnInit {
   }
 
   pagarPrevision(prevision: any) {
-    Swal.fire({
-      title: `Pagar previsión ${prevision.titulo}`,
-      text: `¿Estás seguro de que deseas pagar la previsión por ${prevision.importe} €?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Pagar',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire('¡Pagado!', 'El pago ha sido realizado.', 'success');
-      }
-    });
+  // Verificar si la previsión ya está pagada
+  if (prevision.pagado) {
+    Swal.fire('Error', 'Esta previsión ya ha sido pagada', 'error');
+    return;
   }
 
+  // Mostrar diálogo de confirmación
+  Swal.fire({
+    title: `Pagar previsión ${prevision.titulo}`,
+    text: `¿Estás seguro de que deseas pagar la previsión por ${prevision.importe.toFixed(2)} €?`,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Pagar',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Mostrar pantalla de carga
+      Swal.fire({
+        title: 'Procesando pago...',
+        didOpen: () => {
+          Swal.showLoading();
+        }
+      });
+
+      // Simulamos un tiempo de procesamiento
+      setTimeout(() => {
+        try {
+          // Actualizamos los datos mock
+          prevision.pagado = true;
+          prevision.emailEnviado = true;
+          
+          // Agregamos la fecha actual al historial de intentos
+          if (!prevision.historialIntentos) {
+            prevision.historialIntentos = [];
+          }
+          prevision.historialIntentos.push(new Date().toISOString());
+          
+          // Mostrar mensaje de éxito
+          Swal.fire({
+            title: '¡Pago exitoso!',
+            html: `
+              <p>La previsión "${prevision.titulo}" ha sido pagada correctamente.</p>
+              <p>Importe: ${prevision.importe.toFixed(2)} €</p>
+              <p>Se ha enviado un correo de confirmación.</p>
+            `,
+            icon: 'success'
+          });
+        } catch (error) {
+          // Mostrar mensaje de error
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un error al procesar el pago. Por favor, intente nuevamente.',
+            icon: 'error'
+          });
+        }
+      }, 2000); // Simulamos 2 segundos de procesamiento
+    }
+  });
+}
   verDetallesModal(prevision: any) {
     console.log("A");
     

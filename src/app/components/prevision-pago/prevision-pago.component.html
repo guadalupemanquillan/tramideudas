@@ -1,68 +1,80 @@
-  <div class="container mt-4 flex-grow-1">
-    <div class="row mb-4">
-      <div class="col-12">
-        <div class="card shadow-sm p-3">
-          <div class="card-body">
-            <h2 class="card-title mb-4">Previsiones de Pago</h2>
-            <div class="table-responsive">
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>Título</th>
-                    <th>Importe</th>
-                    <th>Fecha Prevista</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let prevision of previsiones">
-                    <td>{{ prevision.titulo }}</td>
-                    <td>{{ prevision.importe | currency:'EUR':'symbol' }}</td>
-                    <td>{{ prevision.fechaPrevista | date:'dd/MM/yyyy' }}</td>
-                    <td>
-                      <span class="badge"
-                            [ngClass]="{
-                              'bg-success': prevision.pagado,
-                              'bg-warning': !prevision.pagado && !prevision.error,
-                              'bg-danger': prevision.error
-                            }">
-                        {{ prevision.pagado ? 'Pagado' : (prevision.error ? 'Error' : 'Pendiente') }}
-                      </span>
-                    </td>
-                    <td>
-                      <button
-                        (click)="verDetallesModal(prevision)"
-                        type="button"
-                        class="btn btn-primary m-2"
-                      >
-                        Detalles
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-success m-2"
-                      >
-                        Pagar
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+<div class="container mt-4 flex-grow-1">
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card shadow-sm p-3">
+        <div class="card-body">
+          <h2 class="card-title mb-4">Previsiones de Pago</h2>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Título</th>
+                  <th>Importe</th>
+                  <th>Fecha Prevista</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let prevision of previsiones">
+                  <td>{{ prevision.titulo }}</td>
+                  <td>{{ prevision.importe | currency:'EUR':'symbol' }}</td>
+                  <td>{{ prevision.fechaPrevista | date:'dd/MM/yyyy' }}</td>
+                  <td>
+                    <span class="badge"
+                          [ngClass]="{
+                            'bg-success': prevision.pagado,
+                            'bg-warning': !prevision.pagado && !prevision.error,
+                            'bg-danger': prevision.error
+                          }">
+                      {{ prevision.pagado ? 'Pagado' : (prevision.error ? 'Error' : 'Pendiente') }}
+                    </span>
+                  </td>
+                  <td>
+                    <button
+                      (click)="verDetallesModal(prevision)"
+                      type="button"
+                      class="btn btn-primary m-2">
+                      Detalles
+                    </button>
+                    <button
+                      type="button"
+                      class="btn m-2"
+                      [ngClass]="{
+                        'btn-success': !prevision.pagado && !prevision.error,
+                        'btn-secondary': prevision.pagado,
+                        'btn-danger': !prevision.pagado && prevision.error
+                      }"
+                      (click)="pagarPrevision(prevision)"
+                      [disabled]="prevision.pagado"
+                      [title]="prevision.pagado ? 'Esta previsión ya está pagada' : 'Realizar pago'">
+                      <i class="fas"
+                         [ngClass]="{
+                           'fa-check': prevision.pagado,
+                           'fa-money-bill': !prevision.pagado && !prevision.error,
+                           'fa-exclamation-circle': !prevision.pagado && prevision.error
+                         }">
+                      </i>
+                      {{ prevision.pagado ? 'Pagado' : 'Pagar' }}
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Modal de Detalles -->
-  <app-prevision-pago-detalles-modal
-    [prevision]="previsionSeleccionada"
-    [modalAbierto]="modalAbierto"
-    (cerrarModalEvent)="cerrarModal()"
-  ></app-prevision-pago-detalles-modal>
-
-<!---falta aqui moficar el boton de pagar porque hasta ahora haciendo lo mismo que detalles. se debe modicar con *ngFor=-->
+<!-- Modal de Detalles -->
+<app-prevision-pago-detalles-modal
+  [prevision]="previsionSeleccionada"
+  [modalAbierto]="modalAbierto"
+  (cerrarModalEvent)="cerrarModal()">
+</app-prevision-pago-detalles-modal>
+<!---falta aqui moficar el boton de pagar modicar con *ngFor= ya que falta que el boton de pagar se muestre solo en el primer lugar , -->
 <!-- Acá van los modals / children-->
 <!-- [Input] (Un valor que espera, puede ser objeto, boolean ,etc)-->
 <!-- (Output) Son eventos que emite el children y llaman a una funcion en el padre -->

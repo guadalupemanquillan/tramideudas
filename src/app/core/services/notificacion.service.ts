@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
@@ -13,6 +14,8 @@ interface Notificacion {
   providedIn: 'root'
 })
 export class NotificacionService {
+  private APIURL: string =  'https://clientes.tramideudas.es/'
+
   private notificacionesMock: Notificacion[] = [
     {
       "titulo": "Actualización de política de privacidad",
@@ -31,7 +34,11 @@ export class NotificacionService {
     
   ];
 
-  constructor() {}
+  constructor(
+    private http: HttpClient
+  ) {}
+
+  
 
   getNotificacionesImportantes(): Observable<Notificacion[]> {
     // va a Devolver un observable con las notificaciones mock
@@ -46,4 +53,13 @@ export class NotificacionService {
     }
     return of(this.notificacionesMock);
   }
+
+  // marcarNotificacionLeida(id: string) {
+  //   let data = true;
+  //   try {
+  //     return this.http.post(`${this.APIURL}/marcarLeida/${id}`, data)
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // }
 }
