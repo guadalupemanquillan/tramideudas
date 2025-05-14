@@ -26,7 +26,7 @@ export class NotificacionService {
       "descripcion": "Habrá una interrupción del servicio este domingo de 2 a 4 AM.",
       "departamento": "IT",
       "createdAt": "2025-05-03T08:15:00Z",
-      "estado": "leida"
+      "estado": "no leida"
     }
     
   ];

@@ -1,5 +1,21 @@
+
+<ul class="navbar-nav ms-auto mb-2 mb-lg-0"> 
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownNotificaciones" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-bell"></i> 
+
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+    {{notificacionesImportantes.length}}
+    <span class="visually-hidden">mensajes no leídos</span>
+  </span>
+            <!-- Aquí podrías agregar un badge con el número de notificaciones si lo deseas -->
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownNotificaciones">
+            <li><h6 class="dropdown-header">Notificaciones</h6></li>
+            <li><hr class="dropdown-divider"></li>
+            <li class="dropdown-item-texts p-4 " style="width: 30vw;"> 
+
 <div *ngIf="notificacionesImportantes.length > 0">
-  <h2>Notificaciones Importantes</h2>
   <ul>
     <li *ngFor="let notificacion of notificacionesImportantes">
       <div class="notificacion">
@@ -28,3 +44,8 @@
 <div *ngIf="notificacionesImportantes.length === 0">
   <p>No tienes notificaciones importantes.</p>
 </div>
+
+    </li>
+          </ul>
+        </li>
+      </ul>
